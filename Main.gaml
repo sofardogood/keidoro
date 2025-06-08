@@ -1,0 +1,38 @@
+//まず"gama platform"を検索
+//shapeで検索(GAMAに表示させる図形の選択)
+
+
+model Main  // モデルの名前を "Main" と定義
+
+// 他のGAMLファイルをインポート（エージェントの定義などが含まれている）
+import "./Thief.gaml"
+import "./Prison.gaml"
+import "./Person.gaml"
+import "./Policeperson.gaml"
+import "./Person.gaml"  // 重複してインポートされているが、GAMAでは無視される
+
+global {
+	geometry shape <- square(100);  // モデル全体の形状を100x100の正方形に設定
+	
+	init {
+		create thief number:5;         // thief（泥棒）エージェントを5体生成
+		create prison;                 // prison（刑務所）エージェントを1つ生成
+		create policeperson number:2; // policeperson（警察官）エージェントを2体生成
+	}
+}
+
+experiment test type:gui {  // GUIを使った実験 "test" を定義
+
+    float minimum_cycle_duration <- 0.02;  // シミュレーションの最小サイクル時間（秒）
+    
+    output {
+    	display ground type:3d {  // 3D表示を "ground" という名前で定義
+    	
+    	species prison;        // 表示対象に prison を追加
+    	species thief;         // 表示対象に thief を追加
+    	species policeperson;  // 表示対象に policeperson を追加
+    	}
+	}
+}
+
+
